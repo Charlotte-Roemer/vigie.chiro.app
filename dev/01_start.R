@@ -26,6 +26,9 @@ golem::fill_desc(
 ## Set {golem} options ----
 golem::set_golem_options()
 
+# blabla
+
+
 ## Create Common Files ----
 ## See ?usethis for more information
 usethis::use_mit_license( name = "Golem User" )  # You can set another license here
