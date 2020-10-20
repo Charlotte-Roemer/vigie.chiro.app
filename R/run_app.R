@@ -8,11 +8,13 @@
 run_app <- function(
   ...
 ) {
+#  setup = setup () # permet d'inclure un script de preparation de fichier (ici setup.R)
   with_golem_options(
     app = shinyApp(
       ui = app_ui, 
       server = app_server
     ), 
     golem_opts = list(...)
+#    golem_opts = list(..., setup)
   )
 }
