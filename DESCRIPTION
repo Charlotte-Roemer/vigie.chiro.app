@@ -1,0 +1,13 @@
+Package: vigie.chiro.app
+Title: Vigie-Chiro App
+Version: 0.0.0.9000
+Authors@R: person('Charlotte', 'Roemer', email = 'AUTHOR@MAIL.COM', role = c('cre', 'aut'))
+Description: Application pour valider manuellement les participations Vigie-Chiro.
+License: MIT + file LICENSE
+Imports: 
+    config,
+    golem,
+    shiny
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
