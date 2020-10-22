@@ -20,14 +20,15 @@ golem::fill_desc(
   author_first_name = "Charlotte", # Your First Name
   author_last_name = "Roemer", # Your Last Name
   author_email = "AUTHOR@MAIL.COM", # Your Email
-  repo_url = NULL # The URL of the GitHub Repo (optional) 
+  repo_url = "https://github.com/Charlotte-Roemer/vigie.chiro.app" # The URL of the GitHub Repo (optional) 
 )     
+
+## Additional information on authorship ----
+# The scripts in this packages were written by 
+#Jean-Francois Julien, Yves Bas, Simon Benateau and Charlotte Roemer
 
 ## Set {golem} options ----
 golem::set_golem_options()
-
-# blabla
-
 
 ## Create Common Files ----
 ## See ?usethis for more information

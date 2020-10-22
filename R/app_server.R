@@ -154,7 +154,7 @@ app_server <- function( input, output, session ) {
         hide_legend("stroke") %>%
         hide_legend("size") %>%
         add_legend(c("shape","fill"),
-                   title = "Especes") %>% #l?gende des formes/groupes
+                   title = "Especes") %>% #legende des formes/groupes
         hide_legend("size") %>%
         add_tooltip(function(data){
           soundexe <- paste(unlist(strsplit(data$Affiche, " ")[1])[1], ".wav", sep="");
