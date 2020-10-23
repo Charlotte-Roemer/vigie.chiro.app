@@ -19,7 +19,6 @@ usethis::use_package( "thinkr" )
 usethis::use_package( "clipr" )
 usethis::use_package( "data.table" )
 usethis::use_package( "dplyr" )
-usethis::use_package( "ggplot2" )
 usethis::use_package( "ggvis" )
 usethis::use_package( "lubridate" )
 
@@ -50,7 +49,7 @@ usethis::use_test( "app" )
 # Documentation
 
 ## Vignette ----
-usethis::use_vignette("vigie.chiro.app")
+usethis::use_vignette("vigie-chiro-app")
 devtools::build_vignettes()
 
 ## Code coverage ----

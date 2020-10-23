@@ -31,7 +31,7 @@ app_server <- function( input, output, session ) {
       AlleYoupi5$DateHeure=DateHeure
       AlleYoupi5$Date_nuit=as.Date(DateHeure+12*3600)
       
-      #Creation de variables pour l'app Shiny
+      #Creation de variables pour l app Shiny
       AlleYoupi5$Affiche <- paste(AlleYoupi5$`nom du fichier`, " sp: ", AlleYoupi5$tadarida_taxon, "Confiance: ", as.character(round(AlleYoupi5$tadarida_probabilite,1), sep=""))
       AlleYoupi5$duree_sequence=AlleYoupi5$temps_fin-AlleYoupi5$temps_debut
       test=match(AlleYoupi5$tadarida_taxon,SpeciesList$Esp)
@@ -39,12 +39,12 @@ app_server <- function( input, output, session ) {
       AlleYoupi5$color=SpeciesList$color[test]
       params <- c("frequence_mediane", "duree_sequence","temps_debut", "temps_fin")
       AlleYoupi5=as.data.frame(AlleYoupi5)
-      AlleYoupi7 <- AlleYoupi5 #tableau avec validations ? sauver
-      AlleYoupi8 <- AlleYoupi7[0, ] #tableau qui s'affiche dans le dernier onglet de l'appli (validations faites)
+      AlleYoupi7 <- AlleYoupi5 #tableau avec validations a sauver
+      AlleYoupi8 <- AlleYoupi7[0, ] #tableau qui s affiche dans le dernier onglet de l appli (validations faites)
       gpnames <-append("Tous", sort(as.character(unique(AlleYoupi5$Groupe))))
       spnames <-append("Toutes", sort(as.character(unique(AlleYoupi5$tadarida_taxon))))
       timespan <- max(DateHeure) - min(DateHeure)
-      sliderlabel <- paste("Intervalle depuis: ", min(AlleYoupi5$DateHeure), "  jusqu'Ã  ", max(AlleYoupi5$DateHeure), sep = "")
+      sliderlabel <- paste("Intervalle depuis: ", min(AlleYoupi5$DateHeure), "  jusqu'a ", max(AlleYoupi5$DateHeure), sep = "")
       mintemps <- min(DateHeure)
       maxtemps <- max(DateHeure)
       fichierslash <- gsub("\\\\", "/", infile$datapath)
@@ -115,12 +115,12 @@ app_server <- function( input, output, session ) {
       if (is.null(input$idchoix)) return(NULL)
       timespan <- max(AlleYoupi5$DateHeure) - min(AlleYoupi5$DateHeure)
       
-      parametre <- AlleYoupi5[,input$paramschoix] #selection du param?tre ? afficher en ordonn?e
+      parametre <- AlleYoupi5[,input$paramschoix] #selection du parametre ? afficher en ordonnee
       AlleYoupi6 <- cbind(AlleYoupi5,parametre)
-      mintemps <- min(AlleYoupi6$DateHeure) + timespan*input$heures[1]/100 #d?but axe abscisse d?fini par le sliderinput dans ui.R
+      mintemps <- min(AlleYoupi6$DateHeure) + timespan*input$heures[1]/100 #debut axe abscisse defini par le sliderinput dans ui.R
       maxtemps <- min(AlleYoupi6$DateHeure) + timespan*input$heures[2]/100 #fin axe abscisse
-      toplot <- subset(AlleYoupi6, AlleYoupi6$DateHeure >= mintemps & AlleYoupi6$DateHeure <= maxtemps & AlleYoupi6$tadarida_probabilite >= input$conf[1] &  AlleYoupi6$tadarida_probabilite <= input$conf[2]) #+s?lection sur les indices de confiance
-      toplot <- subset(toplot,toplot$frequence_mediane>=input$frequence_mediane[1]) #selection par fr?quence m?diane (pour ?viter d'afficher des fr?quences inutiles)
+      toplot <- subset(AlleYoupi6, AlleYoupi6$DateHeure >= mintemps & AlleYoupi6$DateHeure <= maxtemps & AlleYoupi6$tadarida_probabilite >= input$conf[1] &  AlleYoupi6$tadarida_probabilite <= input$conf[2]) #+selection sur les indices de confiance
+      toplot <- subset(toplot,toplot$frequence_mediane>=input$frequence_mediane[1]) #selection par frequence mediane (pour eviter d'afficher des frequences inutiles)
       toplot <- subset(toplot,toplot$frequence_mediane<=input$frequence_mediane[2])
       
       if (input$idchoix != "Tous")  subset(toplot, toplot$groupe == input$idchoix)
@@ -138,7 +138,7 @@ app_server <- function( input, output, session ) {
       req(sp())
       AlleYoupi5 <- donneesParticipation()
       wavdir <- wavdir()
-      submit0 <- 0 #initialisation du fichier s?lectionner sur le graphe par click ?
+      submit0 <- 0 #initialisation du fichier selectionner sur le graphe par click ?
       
       #browser()
       
@@ -170,19 +170,19 @@ app_server <- function( input, output, session ) {
         ; output$table2 <- renderTable(AlleYoupi5[qui, ])
         reactiveValues()
         
-        if (input$submit > submit0) { #si on a cliqu? sur "valider"
+        if (input$submit > submit0) { #si on a clique sur "valider"
           AlleYoupi5[qui, 8:9] <<- isolate(c(input$espececorrige,input$probacorrige))
           if(!exists("AlleYoupi8")){AlleYoupi8 <- AlleYoupi5[0, ]} #tableau qui s'affiche dans le dernier onglet de l'appli (validations faites)
           AlleYoupi8 <<- isolate(unique(rbind(AlleYoupi5[qui, ],AlleYoupi8))) #incr?mente les validations dans AlleYoupi8
-          AlleYoupi7 <<- isolate(AlleYoupi5) #tableau avec validations ? sauver
+          AlleYoupi7 <<- isolate(AlleYoupi5) #tableau avec validations a sauver
           submit0 <<- input$submit}
         output$table3 <- renderDataTable({AlleYoupi8 }) #affiche AlleYoupi8 dans le dernier onglet
         output$table4 <- renderDataTable({AlleYoupi7 }) #affiche AlleYoupi8 dans le dernier onglet
         
-        #  Sauver imm?diatement cette table modifi?e.
+        #  Sauver immediatement cette table modifiee.
         }
         , "click") %>%
-        add_tooltip(function(data){ paste0(data$Affiche)}, "hover") %>% #d?finir l'affichage quand on "survole" des points dans le graphe
+        add_tooltip(function(data){ paste0(data$Affiche)}, "hover") %>% #definir l'affichage quand on "survole" des points dans le graphe
         bind_shiny("plot", "plot_ui")
       
     })

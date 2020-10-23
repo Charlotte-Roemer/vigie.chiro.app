@@ -3,12 +3,9 @@
 #' @param request Internal parameter for `{shiny}`. 
 #'     DO NOT REMOVE.
 #' @import shiny
-#' @import data.table
+#' @importFrom data.table fread fwrite
 #' @import dplyr
-#' @import ggplot2
 #' @import ggvis
-#' @import shiny
-#' @import data.table
 #' @import lubridate
 #' @import clipr
 #' @noRd
@@ -36,16 +33,16 @@ app_ui <- function(request) {
                              accept = c("text/csv",
                                         "text/comma-separated-values,text/plain",
                                         ".csv")),
-                   #textInput("wavdirChoice", "Entrer le chemin d'accès répertoire son"),
+                   #textInput("wavdirChoice", "Entrer le chemin d'acces repertoire son"),
                    actionButton("do", "Valider"),
                    uiOutput("paramschoix"),
                    uiOutput("idchoix"),
                    uiOutput("especechoix"),
-                   sliderInput("conf", #s?lection sur le score de Tadarida
+                   sliderInput("conf", #selection sur le score de Tadarida
                                label = "Indice de confiance de l'espece :",
                                min = 0, max = 1, value = c(0.5, 1))
                    ,
-                   sliderInput("frequence_mediane", #s?lection sur la fr?quence m?diane
+                   sliderInput("frequence_mediane", #selection sur la frequence mediane
                                label = "Frequence mediane",
                                min = 0, max = 250, value = c(0, 120))
                    
@@ -69,7 +66,7 @@ app_ui <- function(request) {
         tabsetPanel(
           tabPanel("titre",
                    shiny::column(9,
-                                 ggvisOutput("plot")),
+                                 ggvis::ggvisOutput("plot")),
                    shiny::column(11, offset = 1,
                                  uiOutput("heures")),
                    tableOutput("testStr")
